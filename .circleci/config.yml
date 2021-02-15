@@ -1,12 +1,14 @@
 version: 2.1
 
 jobs:
-  test:
+  checkoutAndTest:
     machine: true
     steps:
+      - checkout
+      - run: npm --version
+      - run: npm install
       - run: npm run test
 workflows:
   build:
     jobs:
-      - checkout
-      - test
+      - checkoutAndTest
