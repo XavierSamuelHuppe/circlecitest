@@ -1,0 +1,12 @@
+version: 2.1
+
+jobs:
+  test:
+    machine: true
+    steps:
+      - run: npm run test
+workflows:
+  build:
+    jobs:
+      - checkout
+      - test
