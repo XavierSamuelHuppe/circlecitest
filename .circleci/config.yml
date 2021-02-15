@@ -21,7 +21,7 @@ jobs:
   deploy:
     machine: true
     steps:
-      - run: deploy"
+      - run: echo "deploy"
 workflows:
   build:
     jobs:
