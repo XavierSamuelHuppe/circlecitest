@@ -13,11 +13,15 @@ jobs:
   afterTests1:
     machine: true
     steps:
-      - run: echo "tests have passed!"
+      - run: echo "tests 1 have passed!"
   afterTests2:
     machine: true
     steps:
-      - run: echo "tests have passed!"
+      - run: echo "tests 2 have passed!"
+  deploy:
+    machine: true
+    steps:
+      - run: deploy"
 workflows:
   build:
     jobs:
