@@ -1,38 +1,70 @@
 version: 2.1
 
 jobs:
-  checkoutAndTest:
-    docker:
-      - image: cimg/node:15.8.0
-    steps:
-      - checkout
-      - run: node --version
-      - run: npm --version
-      - run: npm install
-      - run: npm run test
-  afterTests1:
+  checkout_and_unit_test:
     machine: true
     steps:
-      - run: echo "tests 1 have passed!"
-  afterTests2:
+      - run: echo ""
+  deploy_backend:
     machine: true
     steps:
-      - run: echo "tests 2 have passed!"
-  deploy:
+      - run: echo ""
+  integration_tests_backend:
     machine: true
     steps:
-      - run: echo "deploy"
+      - run: echo ""
+  deploy_staging:
+    machine: true
+    steps:
+      - run: echo ""
+  acceptance_tests_1:
+    machine: true
+    steps:
+      - run: echo ""
+  acceptance_tests_2:
+    machine: true
+    steps:
+      - run: echo ""
+  acceptance_tests_3:
+    machine: true
+    steps:
+      - run: echo ""
+  acceptance_tests_4:
+    machine: true
+    steps:
+      - run: echo ""
+  deploy_production:
+    machine: true
+    steps:
+      - run: echo ""
 workflows:
   build:
     jobs:
-      - checkoutAndTest
-      - afterTests1:
+      - checkout_and_unit_test
+      - deploy_backend:
           requires:
-            - checkoutAndTest
-      - afterTests2:
+            - checkout_and_unit_test
+      - integration_tests_backend:
           requires:
-            - checkoutAndTest
-      - deploy:
+            - deploy_backend
+      - deploy_staging:
           requires:
-            - afterTests1
-            - afterTests2
+            - integration_tests_backend
+      - acceptance_tests_1:
+          requires:
+            - deploy_staging
+      - acceptance_tests_2:
+          requires:
+            - deploy_staging
+      - acceptance_tests_3:
+          requires:
+            - deploy_staging
+      - acceptance_tests_4:
+          requires:
+            - deploy_staging
+      - deploy_production:
+          requires:
+            - acceptance_tests_1
+            - acceptance_tests_2
+            - acceptance_tests_3
+            - acceptance_tests_4
