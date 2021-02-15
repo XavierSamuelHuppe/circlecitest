@@ -2,14 +2,10 @@ version: 2.1
 
 jobs:
   checkoutAndTest:
-    machine: true
+    docker:
+      - image: cimg/node:15.8.0
     steps:
       - checkout
-      - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-      - run: . ~/.nvm/nvm.sh
-      - run: nvm --version
-      - run: nvm install node
-      - run: nvm use node
       - run: node --version
       - run: npm --version
       - run: npm install
